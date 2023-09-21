@@ -17,7 +17,15 @@ jobs:
       run: |
         docker build --tag=samplerestapi:latest .
 
-    - name: push image
-      run: |
-        docker tag samplerestapi:latest github.com/raja-pandian/samplerestapi:latest
-        docker push github.com/raja-pandian/samplerestapi:latest
+    - name: Push To Github registry
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: samplerestapi
+        tags: latest
+        registry: ghcr.io/raja-pandian
+        username: rajapandian.veeriaha@gmail.com
+        password: ${{ secrets.REGISTRY_TOKEN }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
