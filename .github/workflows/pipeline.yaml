@@ -1,0 +1,24 @@
+name: first-pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: linting
+      run: |
+        golint .
+
+    - name: build
+      run: |
+        docker build --tag=samplerestapi:latest .
+
+    - name: push image
+      run: |
+        docker tag samplerestapi:latest github.com/raja-pandian/samplerestapi:latest
+        docker push github.com/raja-pandian/samplerestapi:latest
