@@ -24,7 +24,7 @@ jobs:
         image: samplerestapi
         tags: latest
         registry: ghcr.io/raja-pandian
-        #username: rajapandian.veeraiah@gmail.com
+        username: rajapandian.veeraiah@gmail.com
         password: ${{ secrets.REGISTRY_TOKEN }}
 
     - name: Print image url
